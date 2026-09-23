@@ -1,14 +1,16 @@
 extends Node3D
 
 @onready var main_menu: PanelContainer = $CanvasLayer/MainMenu
-@onready var address: LineEdit = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AddressEntry
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var health_bar: ProgressBar = $CanvasLayer/HUD/HealthBar
+@onready var address: LineEdit = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/AddressEntry
+@onready var check_box: CheckBox = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/CheckBox
 
 const PLAYER = preload("uid://dnwwlqjqwkig")
 
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
+var localhost: bool
 
 func _on_host_button_pressed() -> void:
 	main_menu.hide()
@@ -25,7 +27,17 @@ func _on_host_button_pressed() -> void:
 func _on_join_button_pressed() -> void:
 	main_menu.hide()
 	hud.show()
-	enet_peer.create_client(address.text, PORT)
+	
+	var joinaddress: String
+	if !localhost:
+		if address.text == null:
+			joinaddress = "localhost"
+		else:
+			joinaddress = address.text
+	else:
+		joinaddress = "localhost"
+	
+	enet_peer.create_client(joinaddress, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
 func add_player(peer_id):
@@ -62,3 +74,7 @@ func upnp_setup():
 		"UPNP Port Mapping Failed! Error %s" % map_result)
 	
 	print("Success! Join Address: %s" % upnp.query_external_address())
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	address.visible = !toggled_on
+	localhost = toggled_on
