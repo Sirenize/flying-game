@@ -54,10 +54,11 @@ func _on_join_button_pressed() -> void:
 	enet_peer.create_client(joinaddress, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
-func add_player(peer_id, username):
+func add_player(peer_id, playername):
 	var player = PLAYER.instantiate()
-	if username == null: username = str(peer_id)
-	player.name = username
+	player.name = str(peer_id)
+	if playername == null: playername = str(peer_id)
+	player.username = playername
 	add_child(player)
 	if player.is_multiplayer_authority():
 		player.health_changed.connect(update_health_bar)
@@ -69,8 +70,8 @@ func _on_multiplayer_spawner_spawned(node: Node) -> void:
 	if node.is_multiplayer_authority():
 		node.health_changed.connect(update_health_bar)
 
-func remove_player(username):
-	var player = get_node_or_null(str(username))
+func remove_player(peer_id):
+	var player = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
 

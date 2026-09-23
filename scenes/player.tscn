@@ -33,7 +33,7 @@ shape = SubResource("CapsuleShape3D_kwao7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5159172216879897, 0)
 
 [node name="ak472" parent="Camera3D" unique_id=212787637 instance=ExtResource("2_g2els")]
-transform = Transform3D(1.1419831402049069e-16, 0, 1.865, 0, 1.865, 0, -1.865, 0, 1.1419831402049069e-16, 0.5695259275769129, -0.265358771313448, -0.47461422534781683)
+transform = Transform3D(1.1419831402049066e-16, 0, 1.865, 0, 1.865, 0, -1.865, 0, 1.1419831402049066e-16, 0.5695259275769129, -0.265358771313448, -0.4746142253478168)
 
 [node name="Label" type="Label" parent="Camera3D" unique_id=1084264948]
 anchors_preset = 8
