@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 signal health_changed(health_value)
 
+@onready var nametag: Label3D = $Nametag
 @onready var cam: Camera3D = $Camera3D
 @onready var raycast: RayCast3D = $Camera3D/RayCast3D
 const BULLET = preload("uid://bhgtpxpdedi1u")
@@ -19,7 +20,6 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	if not is_multiplayer_authority(): return
-	
 	cam.current = true
 
 func add_bullet(position):
@@ -67,6 +67,11 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+@rpc("authority", "call_local", "reliable")
+func set_username(playername: String):
+	username = playername
+	nametag.text = playername
 
 @rpc("any_peer")
 func receive_damage():

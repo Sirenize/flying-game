@@ -15,12 +15,14 @@ var enet_peer = ENetMultiplayerPeer.new()
 var localhost: bool = false
 var username
 
+var online_players = {}
+
 func _on_singleplayer_button_pressed() -> void:
 	main_menu.hide()
 	hud.show()
 	username = username_entry.text
 	username_label.text = username
-	add_player(0, username)
+	add_player(0)
 
 func _on_host_button_pressed() -> void:
 	main_menu.hide()
@@ -31,35 +33,45 @@ func _on_host_button_pressed() -> void:
 	multiplayer.peer_disconnected.connect(remove_player)
 	
 	username = username_entry.text
-	username_label.text = username
-	add_player(multiplayer.get_unique_id(), username)
+	online_players[multiplayer.get_unique_id()] = username
+	add_player(multiplayer.get_unique_id())
+	username_label.text = str(multiplayer.get_unique_id())
 	
 	upnp_setup()
 
 func _on_join_button_pressed() -> void:
 	main_menu.hide()
 	hud.show()
-	
+
 	var joinaddress: String
-	if !localhost:
-		if address.text == null:
+
+	if not localhost:
+		if address.text == "":
 			joinaddress = "localhost"
 		else:
 			joinaddress = address.text
 	else:
 		joinaddress = "localhost"
-	
+
 	username = username_entry.text
-	username_label.text = username
+
 	enet_peer.create_client(joinaddress, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
-func add_player(peer_id, playername):
+	multiplayer.connected_to_server.connect(_send_username)
+	
+	username_label.text = str(multiplayer.get_unique_id())
+
+func add_player(peer_id):
 	var player = PLAYER.instantiate()
 	player.name = str(peer_id)
-	if playername == null: playername = str(peer_id)
-	player.username = playername
+
+	var player_username = online_players.get(peer_id, "Player")
+	player.username = player_username
+
 	add_child(player)
+	player.set_username.rpc(player_username)
+
 	if player.is_multiplayer_authority():
 		player.health_changed.connect(update_health_bar)
 
@@ -90,6 +102,16 @@ func upnp_setup():
 		"UPNP Port Mapping Failed! Error %s" % map_result)
 	
 	print("Success! Join Address: %s" % upnp.query_external_address())
+
+func _send_username() -> void:
+	send_username.rpc_id(1, username)
+
+@rpc("any_peer", "reliable")
+func send_username(player_username: String) -> void:
+	var peer_id = multiplayer.get_remote_sender_id()
+	online_players[peer_id] = player_username
+
+	add_player(peer_id)
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	address.visible = !toggled_on

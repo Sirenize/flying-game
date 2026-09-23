@@ -12,7 +12,7 @@ config_version=5
 
 config/name="flying extravaganza"
 run/main_scene="uid://c4f1vmpar508b"
-config/features=PackedStringArray("4.7", "Double Precision", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]

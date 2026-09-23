@@ -73,7 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
 shape = SubResource("BoxShape3D_u63d8")
 
 [node name="Wall2" type="StaticBody3D" parent="Arena" unique_id=798251222]
-transform = Transform3D(6.123234000000001e-17, 0, -1, 0, 1, 0, 1, 0, 6.123234000000001e-17, 0, 0, 0)
+transform = Transform3D(6.123234e-17, 0, -1, 0, 1, 0, 1, 0, 6.123234e-17, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall2" unique_id=465206636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
@@ -84,7 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
 shape = SubResource("BoxShape3D_u63d8")
 
 [node name="Wall3" type="StaticBody3D" parent="Arena" unique_id=1378641561]
-transform = Transform3D(-1, 0, -1.2246469000000002e-16, 0, 1, 0, 1.2246469000000002e-16, 0, -1, 0, 0, 0)
+transform = Transform3D(-1, 0, -1.2246469e-16, 0, 1, 0, 1.2246469e-16, 0, -1, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall3" unique_id=2021105628]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
@@ -95,7 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
 shape = SubResource("BoxShape3D_u63d8")
 
 [node name="Wall4" type="StaticBody3D" parent="Arena" unique_id=768032048]
-transform = Transform3D(6.123234000000001e-17, 0, 1, 0, 1, 0, -1, 0, 6.123234000000001e-17, 0, 0, 0)
+transform = Transform3D(6.123234e-17, 0, 1, 0, 1, 0, -1, 0, 6.123234e-17, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall4" unique_id=1644453484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
@@ -157,6 +157,7 @@ size_flags_vertical = 3
 placeholder_text = "Enter Username"
 
 [node name="SingleplayerButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=490088365]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 text = "join singleplayer"

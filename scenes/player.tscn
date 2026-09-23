@@ -17,6 +17,9 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Camera3D:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("Nametag:text")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=128584345]
 script = ExtResource("1_3vyb7")
@@ -30,10 +33,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_kwao7")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1030184818]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5159172216879897, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5159172, 0)
 
 [node name="ak472" parent="Camera3D" unique_id=212787637 instance=ExtResource("2_g2els")]
-transform = Transform3D(1.1419831402049066e-16, 0, 1.865, 0, 1.865, 0, -1.865, 0, 1.1419831402049066e-16, 0.5695259275769129, -0.265358771313448, -0.4746142253478168)
+transform = Transform3D(1.1419832e-16, 0, 1.865, 0, 1.865, 0, -1.865, 0, 1.1419832e-16, 0.56952596, -0.26535878, -0.47461423)
 
 [node name="Label" type="Label" parent="Camera3D" unique_id=1084264948]
 anchors_preset = 8
@@ -56,3 +59,7 @@ target_position = Vector3(0, 0, -50)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=955057090]
 replication_config = SubResource("SceneReplicationConfig_g2els")
+
+[node name="Nametag" type="Label3D" parent="." unique_id=2140442776]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 2.180573, 0)
+text = "Sirenize"
