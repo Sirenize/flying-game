@@ -4,6 +4,8 @@ signal health_changed(health_value)
 
 @onready var cam: Camera3D = $Camera3D
 @onready var raycast: RayCast3D = $Camera3D/RayCast3D
+const BULLET = preload("uid://bhgtpxpdedi1u")
+
 
 @export var look_sensitivity = .0035
 
@@ -20,6 +22,10 @@ func _ready() -> void:
 	
 	cam.current = true
 
+func add_bullet(position):
+	var bullet = BULLET.instantiate()
+	add_child(bullet)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority() and not multiplayer.is_server(): return
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
@@ -33,6 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		cam.rotation.x = clamp(cam.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 	if Input.is_action_just_pressed("shoot"):
+		add_bullet(position)
 		if raycast.is_colliding():
 			var hit_player = raycast.get_collider()
 			if hit_player is CharacterBody3D:
