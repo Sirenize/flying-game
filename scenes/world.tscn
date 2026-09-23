@@ -106,15 +106,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
 shape = SubResource("BoxShape3D_u63d8")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Arena" unique_id=1913907922]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.769883, 2.046485, 13.205324)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.77, 2, 13.205)
+use_collision = true
 size = Vector3(1, 4, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Arena" unique_id=629002667]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.316104, 2.046485, 4.8980427)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.316, 2, 4.898)
+use_collision = true
 size = Vector3(1, 4, 1)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Arena" unique_id=1756856529]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.778943, 2.0464845, -10.660389)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.779, 2, -10.66)
+use_collision = true
 size = Vector3(1, 4, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=990493151]
