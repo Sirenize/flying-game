@@ -1,0 +1,181 @@
+[gd_scene format=3 uid="uid://c4f1vmpar508b"]
+
+[ext_resource type="Script" uid="uid://cgdxnbrnhr5tq" path="res://scripts/main.gd" id="1_nnsk1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gv5m4"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_f3sb7"]
+sky_material = SubResource("ProceduralSkyMaterial_gv5m4")
+
+[sub_resource type="Environment" id="Environment_fj7yv"]
+background_mode = 2
+sky = SubResource("Sky_f3sb7")
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jvale"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7m05f"]
+albedo_color = Color(0.27437696, 0.35551146, 0.11598902, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jvale"]
+material = SubResource("StandardMaterial3D_7m05f")
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asr3n"]
+albedo_color = Color(0.3580979, 0.16393656, 0.07231445, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u63d8"]
+material = SubResource("StandardMaterial3D_asr3n")
+size = Vector3(52, 11, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u63d8"]
+size = Vector3(51, 11, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvale"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u63d8"]
+bg_color = Color(0, 1, 0.19607843, 1)
+
+[node name="Main" type="Node3D" unique_id=906241318]
+script = ExtResource("1_nnsk1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=690434239]
+environment = SubResource("Environment_fj7yv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1088662798]
+transform = Transform3D(-0.8660254, -0.4330127, 0.25, 0, 0.5, 0.8660254, -0.5, 0.75, -0.4330127, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Arena" type="Node" parent="." unique_id=845565280]
+
+[node name="Floor" type="StaticBody3D" parent="Arena" unique_id=457720366]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Floor" unique_id=131286444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_jvale")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Floor" unique_id=1914188817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_jvale")
+
+[node name="Wall1" type="StaticBody3D" parent="Arena" unique_id=2059396129]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall1" unique_id=274031612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+mesh = SubResource("BoxMesh_u63d8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Wall1" unique_id=934442774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+shape = SubResource("BoxShape3D_u63d8")
+
+[node name="Wall2" type="StaticBody3D" parent="Arena" unique_id=798251222]
+transform = Transform3D(6.123234e-17, 0, -1, 0, 1, 0, 1, 0, 6.123234e-17, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall2" unique_id=465206636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+mesh = SubResource("BoxMesh_u63d8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Wall2" unique_id=1748602231]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+shape = SubResource("BoxShape3D_u63d8")
+
+[node name="Wall3" type="StaticBody3D" parent="Arena" unique_id=1378641561]
+transform = Transform3D(-1, 0, -1.2246469e-16, 0, 1, 0, 1.2246469e-16, 0, -1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall3" unique_id=2021105628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+mesh = SubResource("BoxMesh_u63d8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Wall3" unique_id=691197143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+shape = SubResource("BoxShape3D_u63d8")
+
+[node name="Wall4" type="StaticBody3D" parent="Arena" unique_id=768032048]
+transform = Transform3D(6.123234e-17, 0, 1, 0, 1, 0, -1, 0, 6.123234e-17, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arena/Wall4" unique_id=1644453484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+mesh = SubResource("BoxMesh_u63d8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arena/Wall4" unique_id=167717559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.5, 26)
+shape = SubResource("BoxShape3D_u63d8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=990493151]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer" unique_id=968977937]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 810.0
+offset_top = 444.5
+offset_right = -810.0
+offset_bottom = -444.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu" unique_id=272019930]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer" unique_id=1398383015]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=705432137]
+layout_mode = 2
+text = "flying extravaganza"
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=218202245]
+layout_mode = 2
+text = "host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=990081655]
+layout_mode = 2
+text = "join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=1615334459]
+layout_mode = 2
+placeholder_text = "Enter Address to Join."
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=1140632825]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD" unique_id=1180691168]
+layout_mode = 0
+offset_left = -113.0
+offset_right = 117.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_jvale")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u63d8")
+max_value = 3.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1773594191]
+_spawnable_scenes = PackedStringArray("uid://dnwwlqjqwkig")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
