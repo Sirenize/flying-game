@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bhgtpxpdedi1u"]
+
+[ext_resource type="PackedScene" uid="uid://bpqyc7q5nfxgg" path="res://addons/bulletPEW.glb" id="1_mkf8s"]
+[ext_resource type="Script" uid="uid://dlap05frij7c4" path="res://scenes/bullet.gd" id="1_y25gk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jvale"]
+radius = 0.00390625
+height = 0.024145506
+
+[node name="Bullet" type="RigidBody3D" unique_id=591383996]
+script = ExtResource("1_y25gk")
+
+[node name="bulletPEW2" parent="." unique_id=1603183109 instance=ExtResource("1_mkf8s")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2116851433]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.0020873994, -9.1243124e-11, 0)
+shape = SubResource("CapsuleShape3D_jvale")

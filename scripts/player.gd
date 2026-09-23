@@ -16,12 +16,12 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(str(name).to_int())
 
 func _ready() -> void:
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority() and not multiplayer.is_server(): return
 	
 	cam.current = true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority() and not multiplayer.is_server(): return
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_pressed("escape") and Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
@@ -39,7 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				hit_player.receive_damage.rpc_id(hit_player.get_multiplayer_authority())
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority() and not multiplayer.is_server(): return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

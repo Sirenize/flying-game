@@ -126,10 +126,10 @@ size = Vector3(1, 4, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 810.0
-offset_top = 444.5
-offset_right = -810.0
-offset_bottom = -444.5
+offset_left = 799.0
+offset_top = 414.0
+offset_right = -799.0
+offset_bottom = -414.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -146,15 +146,35 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=705432137]
 layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 24
 text = "flying extravaganza"
 horizontal_alignment = 1
 
-[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=218202245]
+[node name="UsernameEntry" type="TextEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=837103493]
 layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Enter Username"
+
+[node name="SingleplayerButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=490088365]
+layout_mode = 2
+size_flags_vertical = 3
+text = "join singleplayer"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=486883069]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=218202245]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "host"
 
-[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=990081655]
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=990081655]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "join"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" unique_id=1517220950]
@@ -184,12 +204,20 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_vertical = 3
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD" unique_id=1180691168]
-layout_mode = 0
-offset_left = -113.0
-offset_right = 117.0
-offset_bottom = 27.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -115.0
+offset_top = -27.0
+offset_right = 115.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_jvale")
 theme_override_styles/fill = SubResource("StyleBoxFlat_u63d8")
 max_value = 3.0
@@ -197,11 +225,29 @@ step = 1.0
 value = 3.0
 show_percentage = false
 
+[node name="Username" type="Label" parent="CanvasLayer/HUD" unique_id=183641036]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -43.5
+offset_top = -50.0
+offset_right = 43.5
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "USERNAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1773594191]
 _spawnable_scenes = PackedStringArray("uid://dnwwlqjqwkig")
 spawn_path = NodePath("..")
 
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer2/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="toggled" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

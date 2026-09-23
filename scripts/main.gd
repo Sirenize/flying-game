@@ -5,12 +5,22 @@ extends Node3D
 @onready var health_bar: ProgressBar = $CanvasLayer/HUD/HealthBar
 @onready var address: LineEdit = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/AddressEntry
 @onready var check_box: CheckBox = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/CheckBox
+@onready var username_entry: TextEdit = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/UsernameEntry
+@onready var username_label: Label = $CanvasLayer/HUD/Username
 
 const PLAYER = preload("uid://dnwwlqjqwkig")
 
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 var localhost: bool
+var username
+
+func _on_singleplayer_button_pressed() -> void:
+	main_menu.hide()
+	hud.show()
+	username = username_entry.text
+	username_label.text = username
+	add_player(0, username)
 
 func _on_host_button_pressed() -> void:
 	main_menu.hide()
@@ -20,7 +30,9 @@ func _on_host_button_pressed() -> void:
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	
-	add_player(multiplayer.get_unique_id())
+	username = username_entry.text
+	username_label.text = username
+	add_player(multiplayer.get_unique_id(), username)
 	
 	upnp_setup()
 
@@ -37,12 +49,15 @@ func _on_join_button_pressed() -> void:
 	else:
 		joinaddress = "localhost"
 	
+	username = username_entry.text
+	username_label.text = username
 	enet_peer.create_client(joinaddress, PORT)
 	multiplayer.multiplayer_peer = enet_peer
 
-func add_player(peer_id):
+func add_player(peer_id, username):
 	var player = PLAYER.instantiate()
-	player.name = str(peer_id)
+	if username == null: username = str(peer_id)
+	player.name = username
 	add_child(player)
 	if player.is_multiplayer_authority():
 		player.health_changed.connect(update_health_bar)
@@ -54,8 +69,8 @@ func _on_multiplayer_spawner_spawned(node: Node) -> void:
 	if node.is_multiplayer_authority():
 		node.health_changed.connect(update_health_bar)
 
-func remove_player(peer_id):
-	var player = get_node_or_null(str(peer_id))
+func remove_player(username):
+	var player = get_node_or_null(str(username))
 	if player:
 		player.queue_free()
 
