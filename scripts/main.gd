@@ -12,7 +12,7 @@ const PLAYER = preload("uid://dnwwlqjqwkig")
 
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
-var localhost: bool
+var localhost: bool = false
 var username
 
 func _on_singleplayer_button_pressed() -> void:
